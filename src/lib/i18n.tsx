@@ -165,12 +165,11 @@ type Ctx = {
 const I18nCtx = createContext<Ctx | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("uz");
-
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("lang") as Lang | null) : null;
-    if (saved === "uz" || saved === "ru") setLangState(saved);
-  }, []);
+  const [lang, setLangState] = useState<Lang>(() => {
+    if (typeof window === "undefined") return "uz";
+    const saved = localStorage.getItem("lang") as Lang | null;
+    return (saved === "uz" || saved === "ru") ? saved : "uz";
+  });
 
   const setLang = (l: Lang) => {
     setLangState(l);
