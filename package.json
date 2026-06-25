@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && copyfiles -f dist/client/* .output/public/ && copyfiles -f dist/client/assets/* .output/public/assets/",
     "build:dev": "vite build --mode development",
     "start": "bun run .output/server/index.mjs",
     "preview": "vite preview",
