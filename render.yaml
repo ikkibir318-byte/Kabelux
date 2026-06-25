@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: Kabelux
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node .output/server/index.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    redirects:
+      - source: /*
+        destination: /index.html
+        type: rewrite
