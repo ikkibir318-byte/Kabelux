@@ -3,9 +3,12 @@ services:
     name: kabelux
     env: node
     plan: free
+    region: frankfurt
     buildCommand: npm install && npm run build
     startCommand: node .output/server/index.mjs
+    autoDeploy: false
     envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
       - key: NODE_ENV
         value: production
-    autoDeploy: false
