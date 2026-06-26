@@ -7,8 +7,6 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  cloudflare: false,
-
   vite: {
     base: "/",
   },
@@ -18,9 +16,5 @@ export default defineConfig({
     output: {
       publicDir: ".output/public",
     },
-    // Render requires the server to listen on the PORT environment variable
-    experimental: {
-      openAPI: false
-    }
   },
 });
