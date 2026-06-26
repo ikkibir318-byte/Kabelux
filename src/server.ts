@@ -39,6 +39,13 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const url = new URL(request.url);
+    
+    // Health check endpoint for Render
+    if (url.pathname === '/health') {
+      return new Response('OK', { status: 200 });
+    }
+    
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
@@ -51,4 +58,7 @@ export default {
       });
     }
   },
+  // For Node.js deployment (Render, Railway, etc.)
+  port: process.env.PORT ? Number(process.env.PORT) : 3000,
+  hostname: process.env.HOSTNAME || '0.0.0.0'
 };

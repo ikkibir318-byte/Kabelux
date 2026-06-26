@@ -7,21 +7,20 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  cloudflare: false,
+
   vite: {
-    base: '/',
-    build: {
-      rollupOptions: {
-        output: {
-          entryFileNames: 'assets/[name].js',
-          chunkFileNames: 'assets/[name].js',
-        }
-      }
+    base: "/",
+  },
+
+  nitro: {
+    preset: "node-server",
+    output: {
+      publicDir: ".output/public",
+    },
+    // Render requires the server to listen on the PORT environment variable
+    experimental: {
+      openAPI: false
     }
   },
-  nitro: {
-    preset: 'node-server',
-    output: {
-      publicDir: '.output/public'
-    }
-  }
 });
