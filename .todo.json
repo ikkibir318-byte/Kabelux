@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Определить тип проекта и точки запуска",
+    "active_form": "Определяю тип проекта и точки запуска",
+    "status": "in_progress"
+  },
+  {
+    "content": "Проверить настройки Render",
+    "active_form": "Проверяю настройки Render",
+    "status": "pending"
+  },
+  {
+    "content": "Исправить deployment-ошибки",
+    "active_form": "Исправляю deployment-ошибки",
+    "status": "pending"
+  },
+  {
+    "content": "Дать пошаговую инструкцию",
+    "active_form": "Готовлю пошаговую инструкцию",
+    "status": "pending"
+  }
+]
