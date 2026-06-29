@@ -1,15 +1,23 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { useI18n } from "@/lib/i18n";
 import { products, categories, CONTACT, type Product } from "@/lib/products";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
 const productSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
 });
 
 export const Route = createFileRoute("/product")({
   validateSearch: productSchema,
+  beforeLoad: ({ search }) => {
+    if (!search.id) {
+      throw redirect({
+        to: "/",
+        replace: true,
+      });
+    }
+  },
   component: ProductPage,
 });
 
