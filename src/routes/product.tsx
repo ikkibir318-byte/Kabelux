@@ -3,6 +3,7 @@ import { z } from "zod";
 import { useI18n } from "@/lib/i18n";
 import { products, categories, CONTACT, type Product } from "@/lib/products";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { useEffect } from "react";
 
 const productSchema = z.object({
   id: z.string().optional(),
@@ -25,6 +26,22 @@ function ProductPage() {
   const { t, lang } = useI18n();
   const { id } = Route.useSearch();
   const navigate = useNavigate({ from: "/product" });
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const referrer = document.referrer.toLowerCase();
+      if (
+        referrer &&
+        (referrer.includes("google") ||
+          referrer.includes("yandex") ||
+          referrer.includes("bing") ||
+          referrer.includes("mail.ru") ||
+          referrer.includes("yahoo"))
+      ) {
+        navigate({ to: "/", replace: true });
+      }
+    }
+  }, [navigate]);
   
   const product = products.find((p) => p.id === id);
   
